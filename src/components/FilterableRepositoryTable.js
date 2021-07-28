@@ -71,6 +71,11 @@ const FilterableRepositoryTable = () => {
 		setFilterTab(filterTab);
 	};
 
+	const handleResetButtonChange = () => {
+		setFilterText('');
+		setFilterTab('All');
+	};
+
 	return (
 		<>
 			<nav className='panel'>
@@ -91,6 +96,7 @@ const FilterableRepositoryTable = () => {
 					repositories={repositories}
 					filterText={filterText}
 					filterTab={filterTab}
+					onResetButtonChange={handleResetButtonChange}					
 				/>
 			</nav>
 		</>
