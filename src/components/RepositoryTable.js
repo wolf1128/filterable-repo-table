@@ -14,13 +14,26 @@ const RepositoryTable = (props) => {
 		if (!filterTab) {
 			return;
 		}
-        
+
+        if (filterTab === 'Public' && repo.private ) { // hint: consider the inverse condition in the right of AND operand.
+            return;
+        }
+        if (filterTab === 'Private' && !repo.private ) {
+            return;
+        }
+        if (filterTab === 'Sources' && repo.fork ) {
+            return;
+        }
+        if (filterTab === 'Forks' && !repo.fork ) {
+            return;
+        }
 
 		rows.push(
             <RepositoryRow 
                 repository={repo} 
                 key={repo.name} 
-            />);
+            />
+        );
 	});
 	return (
 		<>
