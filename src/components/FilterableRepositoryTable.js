@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchBar from './SearchBar';
 import Tabs from './Tabs';
 import RepositoryTable from './RepositoryTable';
@@ -17,49 +17,67 @@ const FilterableRepositoryTable = () => {
     // 2. Does it remain unchanged over time? If so, it probably isn’t state.
     // 3. Can you compute it based on any other state or props in your component? If so, it isn’t state.
 
+	// STEP#4 Identify Where Your State Should Live
+	// #4/1 Strategy:
+	// - Identify every component that renders something based on that state
+	// - Find a common owner component
+	// - Either the common owner or another component higher up in the hierarchy should own the state
+	// - If you can't find a component where it makes sense to own the state, create a new component solely for holding the state and add it somewhere in the hierarchy above the common owner component.
+	// #4/2 Identification:
+	// RepositoryTable needs to filter the product list based on the state and value of tabs filter and SearchBar needs to display the search text
+	// The common owner component is FilterableRepositoryTable .
+	// It conceptually make sense for the filter text and filter tabs to live in FilterableRepositoryTable .
+
+	const repositories = [
+		{
+			name: 'bulma',							
+			private: false, // public, private
+			fork: false, // fork/source
+		},
+		{
+			name: 'marksheet',							
+			private: false,
+			fork: false,
+		},
+		{
+			name: 'minireset.css',							
+			private: false,
+			fork: false,
+		},
+		{
+			name: 'jgthms.github.io',							
+			private: false,
+			fork: false,
+		},
+		{
+			name: 'daniellowtw/infboard',							
+			private: false,
+			fork: true,
+		},
+		{
+			name: 'mojs',							
+			private: false,
+			fork: true,
+		},
+	];
+
+	const [filterText, setFilterText] = useState('');
+	const [filterTab, setFilterTab] = useState('All');
+
 	return (
 		<>
 			<nav className='panel'>
 				<p className='panel-heading'>Repositories</p>
 				<div className='panel-block'>
-					<SearchBar />
+					<SearchBar filterText={filterText} />
 				</div>
 				<p className='panel-tabs'>
-					<Tabs />
+					<Tabs filterTab={filterTab} />
 				</p>
 				<RepositoryTable
-					repositories={[
-						{
-							name: 'bulma',							
-							private: false, // public, private
-							fork: false, // fork/source
-						},
-						{
-							name: 'marksheet',							
-							private: false,
-							fork: false,
-						},
-						{
-							name: 'minireset.css',							
-							private: false,
-							fork: false,
-						},
-						{
-							name: 'jgthms.github.io',							
-							private: false,
-							fork: false,
-						},
-						{
-							name: 'daniellowtw/infboard',							
-							private: false,
-							fork: true,
-						},
-						{
-							name: 'mojs',							
-							private: false,
-							fork: true,
-						},
-					]}
+					repositories={repositories}
+					filterText={filterText}
+					filterTab={filterTab}
 				/>
 			</nav>
 		</>

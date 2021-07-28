@@ -1,51 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react';
+import RepositoryRow from './RepositoryRow';
 
-const RepositoryTable = ({ repositories }) => {
-    return (
-        <>
-            <a className="panel-block is-active">
-                <span className="panel-icon">
-                    <i className="fas fa-book" aria-hidden="true"></i>
-                </span>
-                {repositories[0].name}
-            </a>
-            <a className="panel-block">
-                <span className="panel-icon">
-                    <i className="fas fa-book" aria-hidden="true"></i>
-                </span>
-                {repositories[1].name}
-            </a>
-            <a className="panel-block">
-                <span className="panel-icon">
-                    <i className="fas fa-book" aria-hidden="true"></i>
-                </span>
-                {repositories[2].name}
-            </a>
-            <a className="panel-block">
-                <span className="panel-icon">
-                    <i className="fas fa-book" aria-hidden="true"></i>
-                </span>
-                {repositories[3].name}
-            </a>
-            <a className="panel-block">
-                <span className="panel-icon">
-                    <i className="fas fa-code-branch" aria-hidden="true"></i>
-                </span>
-                {repositories[4].name}
-            </a>
-            <a className="panel-block">
-                <span className="panel-icon">
-                    <i className="fas fa-code-branch" aria-hidden="true"></i>
-                </span>
-                {repositories[5].name}
-            </a>
-            <div className="panel-block">
-                    <button className="button is-link is-outlined is-fullwidth">
-                        Reset all filters
-                    </button>
-                </div>            
-        </>
-    )
-}
+const RepositoryTable = (props) => {
+	const [filterText, setFilterText] = useState(props.filterText);
+	const [filterTab, setFilterTab] = useState(props.filterTab);
 
-export default RepositoryTable
+	const rows = [];
+
+	props.repositories.forEach((repo) => {
+		if (repo.name.indexOf(filterText) === -1) {
+			return;
+		}
+		if (!filterTab) {
+			return;
+		}
+        
+
+		rows.push(
+            <RepositoryRow 
+                repository={repo} 
+                key={repo.name} 
+            />);
+	});
+	return (
+		<>
+            {rows}
+			<div className='panel-block'>
+				<button className='button is-link is-outlined is-fullwidth'>
+					Reset all filters
+				</button>
+			</div>
+		</>
+	);
+};
+
+export default RepositoryTable;
