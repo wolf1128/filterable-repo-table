@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const Tabs = (props) => {
 
-	const [filterTab, setFilterTab] = useState(props.filterTab);
+	const filterTab = props.filterTab;
 
 	return (
 		<>

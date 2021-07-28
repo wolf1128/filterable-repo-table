@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import RepositoryRow from './RepositoryRow';
 
 const RepositoryTable = (props) => {
-	const [filterText, setFilterText] = useState(props.filterText);
-	const [filterTab, setFilterTab] = useState(props.filterTab);
+	const filterText = props.filterText;
+	const filterTab = props.filterTab;
 
 	const rows = [];
 
