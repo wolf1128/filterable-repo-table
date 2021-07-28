@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bulma/css/bulma.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 ReactDOM.render(
     <App />,
