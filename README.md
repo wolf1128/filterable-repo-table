@@ -1,6 +1,13 @@
-# Getting Started with Create React App
+# Objective
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Main objective is to implement an interactive list with filters and search.
+
+## Details
+- The items should be generated from the items prop.
+- One should be able to filter the items by title using the search bar
+- One should be able to filter the items by tag using the tab bar
+- The "reset filters" button should reset all filters
+- Styling is done with using the [bulma](https://bulma.io/) framework
 
 ## Available Scripts
 
