@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Tabs from './Tabs';
 import RepositoryTable from './RepositoryTable';
+import SearchBar from './SearchBar';
 
 const FilterableRepositoryTable = () => {
 	const repositories: { name: string; private: boolean; fork: boolean }[] = [
@@ -39,6 +40,9 @@ const FilterableRepositoryTable = () => {
     const [filterText, setFilterText] = useState<string>('');
 	const [filterTab, setFilterTab] = useState<string>('All');
 
+	const handleFilterTextChange = (filterText: string) => {
+		setFilterText(filterText);
+	};
 
 	const handleFilterTabChange = (filterTab: string) => {
 		setFilterTab(filterTab);
@@ -52,10 +56,10 @@ const FilterableRepositoryTable = () => {
 	return <nav className='panel'>
 				<p className='panel-heading'>Repositories</p>
 				<div className='panel-block'>
-					{/* <SearchBar
+					<SearchBar
 						filterText={filterText}
 						onFilterTextChange={handleFilterTextChange}
-					/> */}
+					/>
 				</div>
 				<p className='panel-tabs'>
 					<Tabs
